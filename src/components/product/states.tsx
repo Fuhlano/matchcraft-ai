@@ -10,6 +10,7 @@ export function EmptyState({
   description,
   actionLabel,
   onAction,
+  actionTo,
   children,
 }: {
   icon?: React.ElementType;
@@ -17,6 +18,8 @@ export function EmptyState({
   description?: string;
   actionLabel?: string;
   onAction?: () => void;
+  /** Destino de navegação quando a ação é um link de rota. */
+  actionTo?: string;
   children?: React.ReactNode;
 }) {
   return (
@@ -29,7 +32,12 @@ export function EmptyState({
         )}
         <h3 className="text-base font-semibold">{title}</h3>
         {description && <p className="max-w-md text-sm text-muted-foreground">{description}</p>}
-        {actionLabel && onAction && (
+        {actionLabel && actionTo && (
+          <Button asChild className="mt-2">
+            <Link to={actionTo}>{actionLabel}</Link>
+          </Button>
+        )}
+        {actionLabel && !actionTo && onAction && (
           <Button onClick={onAction} className="mt-2">
             {actionLabel}
           </Button>
