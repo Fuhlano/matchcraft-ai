@@ -13,14 +13,18 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedInsightsRouteImport } from './routes/_authenticated/insights'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedPrivacyRouteImport } from './routes/_authenticated/privacy'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedJobsIndexRouteImport } from './routes/_authenticated/jobs/index'
 import { Route as AuthenticatedJobsJobIdRouteImport } from './routes/_authenticated/jobs/$jobId'
 import { Route as AuthenticatedJobsNewRouteImport } from './routes/_authenticated/jobs/new'
+import { Route as AuthenticatedResumesIndexRouteImport } from './routes/_authenticated/resumes/index'
+import { Route as AuthenticatedResumesResumeIdRouteImport } from './routes/_authenticated/resumes/$resumeId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,6 +45,12 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedApplicationsRoute =
+  AuthenticatedApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -59,6 +69,11 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
 const AuthenticatedPrivacyRoute = AuthenticatedPrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
@@ -81,32 +96,52 @@ const AuthenticatedJobsNewRoute = AuthenticatedJobsNewRouteImport.update({
   path: '/jobs/new',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedResumesIndexRoute =
+  AuthenticatedResumesIndexRouteImport.update({
+    id: '/resumes/',
+    path: '/resumes/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedResumesResumeIdRoute =
+  AuthenticatedResumesResumeIdRouteImport.update({
+    id: '/resumes/$resumeId',
+    path: '/resumes/$resumeId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/applications': typeof AuthenticatedApplicationsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/insights': typeof AuthenticatedInsightsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/privacy': typeof AuthenticatedPrivacyRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/jobs/$jobId': typeof AuthenticatedJobsJobIdRoute
   '/jobs/new': typeof AuthenticatedJobsNewRoute
+  '/resumes/$resumeId': typeof AuthenticatedResumesResumeIdRoute
   '/jobs/': typeof AuthenticatedJobsIndexRoute
+  '/resumes/': typeof AuthenticatedResumesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/applications': typeof AuthenticatedApplicationsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/insights': typeof AuthenticatedInsightsRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/privacy': typeof AuthenticatedPrivacyRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/jobs/$jobId': typeof AuthenticatedJobsJobIdRoute
   '/jobs/new': typeof AuthenticatedJobsNewRoute
+  '/resumes/$resumeId': typeof AuthenticatedResumesResumeIdRoute
   '/jobs': typeof AuthenticatedJobsIndexRoute
+  '/resumes': typeof AuthenticatedResumesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -114,14 +149,18 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/insights': typeof AuthenticatedInsightsRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/privacy': typeof AuthenticatedPrivacyRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/jobs/$jobId': typeof AuthenticatedJobsJobIdRoute
   '/_authenticated/jobs/new': typeof AuthenticatedJobsNewRoute
+  '/_authenticated/resumes/$resumeId': typeof AuthenticatedResumesResumeIdRoute
   '/_authenticated/jobs/': typeof AuthenticatedJobsIndexRoute
+  '/_authenticated/resumes/': typeof AuthenticatedResumesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -129,41 +168,53 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/applications'
     | '/dashboard'
     | '/insights'
     | '/onboarding'
     | '/privacy'
+    | '/profile'
     | '/settings'
     | '/jobs/$jobId'
     | '/jobs/new'
+    | '/resumes/$resumeId'
     | '/jobs/'
+    | '/resumes/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/applications'
     | '/dashboard'
     | '/insights'
     | '/onboarding'
     | '/privacy'
+    | '/profile'
     | '/settings'
     | '/jobs/$jobId'
     | '/jobs/new'
+    | '/resumes/$resumeId'
     | '/jobs'
+    | '/resumes'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/applications'
     | '/_authenticated/dashboard'
     | '/_authenticated/insights'
     | '/_authenticated/onboarding'
     | '/_authenticated/privacy'
+    | '/_authenticated/profile'
     | '/_authenticated/settings'
     | '/_authenticated/jobs/$jobId'
     | '/_authenticated/jobs/new'
+    | '/_authenticated/resumes/$resumeId'
     | '/_authenticated/jobs/'
+    | '/_authenticated/resumes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -203,6 +254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/applications': {
+      id: '/_authenticated/applications'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof AuthenticatedApplicationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -229,6 +287,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof AuthenticatedPrivacyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/settings': {
@@ -259,29 +324,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedJobsNewRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/resumes/': {
+      id: '/_authenticated/resumes/'
+      path: '/resumes'
+      fullPath: '/resumes/'
+      preLoaderRoute: typeof AuthenticatedResumesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resumes/$resumeId': {
+      id: '/_authenticated/resumes/$resumeId'
+      path: '/resumes/$resumeId'
+      fullPath: '/resumes/$resumeId'
+      preLoaderRoute: typeof AuthenticatedResumesResumeIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedInsightsRoute: typeof AuthenticatedInsightsRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedPrivacyRoute: typeof AuthenticatedPrivacyRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedJobsJobIdRoute: typeof AuthenticatedJobsJobIdRoute
   AuthenticatedJobsNewRoute: typeof AuthenticatedJobsNewRoute
+  AuthenticatedResumesResumeIdRoute: typeof AuthenticatedResumesResumeIdRoute
   AuthenticatedJobsIndexRoute: typeof AuthenticatedJobsIndexRoute
+  AuthenticatedResumesIndexRoute: typeof AuthenticatedResumesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedInsightsRoute: AuthenticatedInsightsRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedPrivacyRoute: AuthenticatedPrivacyRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedJobsJobIdRoute: AuthenticatedJobsJobIdRoute,
   AuthenticatedJobsNewRoute: AuthenticatedJobsNewRoute,
+  AuthenticatedResumesResumeIdRoute: AuthenticatedResumesResumeIdRoute,
   AuthenticatedJobsIndexRoute: AuthenticatedJobsIndexRoute,
+  AuthenticatedResumesIndexRoute: AuthenticatedResumesIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
