@@ -1,4 +1,4 @@
-# MatchCraft AI
+# MatchCraft AI - https://match-your-next-role.lovable.app
 
 Criar do zero um SaaS de Matchmaking de Vagas + Currículos ATS-Friendly
 
