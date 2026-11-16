@@ -29,7 +29,7 @@ export const deleteMyAccount = createServerFn({ method: "POST" })
 
     for (const table of tables) {
       const column = table === "profiles" ? "id" : "user_id";
-      await supabaseAdmin.from(table).delete().eq(column, userId);
+      await (supabaseAdmin.from(table) as any).delete().eq(column, userId);
     }
 
     const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);

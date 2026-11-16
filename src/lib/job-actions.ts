@@ -22,7 +22,7 @@ export async function analyzeJob(job: Job, aiEnabled: boolean): Promise<JobAnaly
 
   const { error } = await supabase
     .from("jobs")
-    .update({ analysis, analyzed_at: new Date().toISOString() })
+    .update({ analysis: analysis as never, analyzed_at: new Date().toISOString() })
     .eq("id", job.id);
   if (error) throw error;
 
@@ -59,8 +59,8 @@ export async function saveMatch(profile: MasterProfile, job: Job, analysis: JobA
     user_id: userId,
     job_id: job.id,
     score: result.score,
-    breakdown: { items: result.breakdown, level: result.level },
-    details: { items: result.items },
+    breakdown: { items: result.breakdown, level: result.level } as never,
+    details: { items: result.items } as never,
   };
 
   if (existing) {
