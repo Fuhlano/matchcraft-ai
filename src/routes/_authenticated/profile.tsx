@@ -47,13 +47,13 @@ function ProfilePage() {
   async function saveBasic() {
     const id = await requireUserId();
     const { error } = await supabase.from("profiles").update(basic).eq("id", id);
-    if (error) return toast.error("Não foi possível salvar.");
+    if (error) { toast.error("Não foi possível salvar."); return; }
     refresh(); toast.success("Perfil salvo.");
   }
   async function add(table: "skills" | "languages" | "certifications" | "education" | "experiences", row: Record<string, unknown>, reset: () => void) {
     const user_id = await requireUserId();
     const { error } = await supabase.from(table).insert({ ...row, user_id } as never);
-    if (error) return toast.error("Não foi possível adicionar.");
+    if (error) { toast.error("Não foi possível adicionar."); return; }
     reset(); refresh();
   }
   async function del(table: "skills" | "languages" | "certifications" | "education" | "experiences", id: string) {

@@ -109,9 +109,9 @@ function JobDetail() {
           title: `${job.title}${job.company ? ` — ${job.company}` : ""}`,
           company: job.company,
           template: "classic",
-          content,
+          content: content as never,
           ats_score: ats.score,
-          ats_breakdown: ats.breakdown,
+          ats_breakdown: ats.breakdown as never,
         })
         .select("id")
         .single();
@@ -120,7 +120,7 @@ function JobDetail() {
         user_id: userId,
         resume_id: data.id,
         version: 1,
-        content,
+        content: content as never,
         ats_score: ats.score,
         note: "Versão inicial gerada a partir do perfil mestre",
       });
@@ -281,7 +281,7 @@ function JobDetail() {
                     <p className="text-sm text-muted-foreground">Nenhum identificado na descrição.</p>
                   ) : (
                     analysis.requiredSkills.map((skill) => (
-                      <RequirementBadge key={skill} label={skill} required />
+                      <RequirementBadge key={skill} label={skill} status={items.find((i) => i.label === skill)?.status ?? "gap"} required />
                     ))
                   )}
                 </CardContent>
@@ -295,7 +295,7 @@ function JobDetail() {
                     <p className="text-sm text-muted-foreground">Nenhum identificado na descrição.</p>
                   ) : (
                     analysis.desirableSkills.map((skill) => (
-                      <RequirementBadge key={skill} label={skill} required={false} />
+                      <RequirementBadge key={skill} label={skill} status={items.find((i) => i.label === skill)?.status ?? "gap"} required={false} />
                     ))
                   )}
                 </CardContent>

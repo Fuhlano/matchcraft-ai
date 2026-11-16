@@ -66,7 +66,7 @@ function Settings() {
     const userId = await requireUserId();
     await supabase
       .from("profiles")
-      .update({ [field]: value })
+      .update({ [field]: value } as never)
       .eq("id", userId);
     invalidate(["master-profile"]);
   }
@@ -78,7 +78,6 @@ function Settings() {
     }
     const { error } = await supabase.auth.updateUser({
       password: password.next,
-      // @ts-expect-error current_password é exigido pelo backend em troca de senha autenticada
       current_password: password.current,
     });
     if (error) {

@@ -36,13 +36,13 @@ function Applications() {
     const userId = await requireUserId();
     const patch: Record<string, unknown> = { status };
     if (status === "applied") patch['applied_at'] = new Date().toISOString().slice(0, 10);
-    await supabase.from("applications").update(patch).eq("id", id);
+    await supabase.from("applications").update(patch as never).eq("id", id);
     await supabase.from("application_events").insert({ user_id: userId, application_id: id, event: "status", detail: APPLICATION_STATUS_LABEL[status] });
     invalidate(["applications"]);
     toast.success(`Movida para ${APPLICATION_STATUS_LABEL[status]}.`);
   }
   async function update(id: string, field: "next_action" | "notes", value: string) {
-    await supabase.from("applications").update({ [field]: value }).eq("id", id);
+    await supabase.from("applications").update({ [field]: value } as never).eq("id", id);
     invalidate(["applications"]);
   }
 

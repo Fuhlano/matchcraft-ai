@@ -96,7 +96,7 @@ function NewJob() {
       if (!job.title || job.title === "Vaga sem título") patch['title'] = form.title || job.title;
       if (!job.seniority && analysis.seniority) patch['seniority'] = analysis.seniority;
       if (!job.area && analysis.area) patch['area'] = analysis.area;
-      if (Object.keys(patch).length) await supabase.from("jobs").update(patch).eq("id", job.id);
+      if (Object.keys(patch).length) await supabase.from("jobs").update(patch as never).eq("id", job.id);
 
       await notify("Análise concluída", `${job.title} — requisitos extraídos e match calculado.`);
       invalidate(["jobs", "notifications", "match"]);
