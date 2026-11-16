@@ -132,7 +132,7 @@ function GlobalSearch({ open, setOpen }: { open: boolean; setOpen: (v: boolean) 
       <CommandList>
         <CommandEmpty>Nenhum resultado encontrado.</CommandEmpty>
         <CommandGroup heading="Páginas">
-          {NAV.flatMap((g) => g.items).map((item) => (
+          {NAV.flatMap((g) => [...g.items] as { to: string; label: string; icon: React.ElementType }[]).map((item) => (
             <CommandItem key={item.to} value={item.label} onSelect={() => go(item.to)}>
               <item.icon className="mr-2 size-4" aria-hidden />
               {item.label}

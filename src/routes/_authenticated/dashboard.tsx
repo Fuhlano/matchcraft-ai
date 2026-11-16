@@ -182,7 +182,7 @@ function Metric({
   icon: React.ElementType;
   label: string;
   value: string;
-  hint?: string;
+  hint?: string | undefined;
 }) {
   return (
     <Card>

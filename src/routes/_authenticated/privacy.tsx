@@ -46,7 +46,7 @@ function Privacy() {
     const userId = await requireUserId();
     const { error } = await supabase
       .from("profiles")
-      .update({ [field]: value })
+      .update({ [field]: value } as never)
       .eq("id", userId);
     if (error) {
       toast.error("Não foi possível salvar a preferência.");

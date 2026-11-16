@@ -66,7 +66,7 @@ function Settings() {
     const userId = await requireUserId();
     await supabase
       .from("profiles")
-      .update({ [field]: value })
+      .update({ [field]: value } as never)
       .eq("id", userId);
     invalidate(["master-profile"]);
   }

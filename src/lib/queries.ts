@@ -95,7 +95,7 @@ export function useJobs() {
         .select("*, matches(score, breakdown, details)")
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return (data ?? []) as (Job & { matches: { score: number }[] })[];
+      return (data ?? []) as unknown as (Job & { matches: { score: number }[] })[];
     },
   });
 }
