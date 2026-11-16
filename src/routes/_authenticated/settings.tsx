@@ -78,7 +78,6 @@ function Settings() {
     }
     const { error } = await supabase.auth.updateUser({
       password: password.next,
-      // @ts-expect-error current_password é exigido pelo backend em troca de senha autenticada
       current_password: password.current,
     });
     if (error) {

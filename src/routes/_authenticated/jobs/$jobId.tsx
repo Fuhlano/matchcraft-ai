@@ -281,7 +281,7 @@ function JobDetail() {
                     <p className="text-sm text-muted-foreground">Nenhum identificado na descrição.</p>
                   ) : (
                     analysis.requiredSkills.map((skill) => (
-                      <RequirementBadge key={skill} label={skill} status="gap" required />
+                      <RequirementBadge key={skill} label={skill} status={items.find((i) => i.label === skill)?.status ?? "gap"} required />
                     ))
                   )}
                 </CardContent>
@@ -295,7 +295,7 @@ function JobDetail() {
                     <p className="text-sm text-muted-foreground">Nenhum identificado na descrição.</p>
                   ) : (
                     analysis.desirableSkills.map((skill) => (
-                      <RequirementBadge key={skill} label={skill} status="gap" required={false} />
+                      <RequirementBadge key={skill} label={skill} status={items.find((i) => i.label === skill)?.status ?? "gap"} required={false} />
                     ))
                   )}
                 </CardContent>
