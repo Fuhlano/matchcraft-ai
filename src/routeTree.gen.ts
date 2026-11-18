@@ -23,6 +23,7 @@ import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedJobsIndexRouteImport } from './routes/_authenticated/jobs/index'
 import { Route as AuthenticatedJobsJobIdRouteImport } from './routes/_authenticated/jobs/$jobId'
 import { Route as AuthenticatedJobsNewRouteImport } from './routes/_authenticated/jobs/new'
+import { Route as AuthenticatedJobsSearchRouteImport } from './routes/_authenticated/jobs/search'
 import { Route as AuthenticatedResumesIndexRouteImport } from './routes/_authenticated/resumes/index'
 import { Route as AuthenticatedResumesResumeIdRouteImport } from './routes/_authenticated/resumes/$resumeId'
 
@@ -96,6 +97,11 @@ const AuthenticatedJobsNewRoute = AuthenticatedJobsNewRouteImport.update({
   path: '/jobs/new',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedJobsSearchRoute = AuthenticatedJobsSearchRouteImport.update({
+  id: '/jobs/search',
+  path: '/jobs/search',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedResumesIndexRoute =
   AuthenticatedResumesIndexRouteImport.update({
     id: '/resumes/',
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AuthenticatedSettingsRoute
   '/jobs/$jobId': typeof AuthenticatedJobsJobIdRoute
   '/jobs/new': typeof AuthenticatedJobsNewRoute
+  '/jobs/search': typeof AuthenticatedJobsSearchRoute
   '/resumes/$resumeId': typeof AuthenticatedResumesResumeIdRoute
   '/jobs/': typeof AuthenticatedJobsIndexRoute
   '/resumes/': typeof AuthenticatedResumesIndexRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsRoute
   '/jobs/$jobId': typeof AuthenticatedJobsJobIdRoute
   '/jobs/new': typeof AuthenticatedJobsNewRoute
+  '/jobs/search': typeof AuthenticatedJobsSearchRoute
   '/resumes/$resumeId': typeof AuthenticatedResumesResumeIdRoute
   '/jobs': typeof AuthenticatedJobsIndexRoute
   '/resumes': typeof AuthenticatedResumesIndexRoute
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/jobs/$jobId': typeof AuthenticatedJobsJobIdRoute
   '/_authenticated/jobs/new': typeof AuthenticatedJobsNewRoute
+  '/_authenticated/jobs/search': typeof AuthenticatedJobsSearchRoute
   '/_authenticated/resumes/$resumeId': typeof AuthenticatedResumesResumeIdRoute
   '/_authenticated/jobs/': typeof AuthenticatedJobsIndexRoute
   '/_authenticated/resumes/': typeof AuthenticatedResumesIndexRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/jobs/$jobId'
     | '/jobs/new'
+    | '/jobs/search'
     | '/resumes/$resumeId'
     | '/jobs/'
     | '/resumes/'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/jobs/$jobId'
     | '/jobs/new'
+    | '/jobs/search'
     | '/resumes/$resumeId'
     | '/jobs'
     | '/resumes'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings'
     | '/_authenticated/jobs/$jobId'
     | '/_authenticated/jobs/new'
+    | '/_authenticated/jobs/search'
     | '/_authenticated/resumes/$resumeId'
     | '/_authenticated/jobs/'
     | '/_authenticated/resumes/'
@@ -324,6 +336,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedJobsNewRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/jobs/search': {
+      id: '/_authenticated/jobs/search'
+      path: '/jobs/search'
+      fullPath: '/jobs/search'
+      preLoaderRoute: typeof AuthenticatedJobsSearchRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/resumes/': {
       id: '/_authenticated/resumes/'
       path: '/resumes'
@@ -351,6 +370,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedJobsJobIdRoute: typeof AuthenticatedJobsJobIdRoute
   AuthenticatedJobsNewRoute: typeof AuthenticatedJobsNewRoute
+  AuthenticatedJobsSearchRoute: typeof AuthenticatedJobsSearchRoute
   AuthenticatedResumesResumeIdRoute: typeof AuthenticatedResumesResumeIdRoute
   AuthenticatedJobsIndexRoute: typeof AuthenticatedJobsIndexRoute
   AuthenticatedResumesIndexRoute: typeof AuthenticatedResumesIndexRoute
@@ -366,6 +386,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedJobsJobIdRoute: AuthenticatedJobsJobIdRoute,
   AuthenticatedJobsNewRoute: AuthenticatedJobsNewRoute,
+  AuthenticatedJobsSearchRoute: AuthenticatedJobsSearchRoute,
   AuthenticatedResumesResumeIdRoute: AuthenticatedResumesResumeIdRoute,
   AuthenticatedJobsIndexRoute: AuthenticatedJobsIndexRoute,
   AuthenticatedResumesIndexRoute: AuthenticatedResumesIndexRoute,

@@ -36,7 +36,8 @@ const NAV = [
     label: "Principal",
     items: [
       { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-      { to: "/jobs/new", label: "Encontrar vagas", icon: Search },
+      { to: "/jobs/search", label: "Encontrar vagas", icon: Search },
+      { to: "/jobs/new", label: "Adicionar vaga", icon: FileText },
       { to: "/jobs", label: "Minhas vagas", icon: Briefcase },
       { to: "/resumes", label: "Currículos", icon: FileText },
       { to: "/applications", label: "Candidaturas", icon: Kanban },
@@ -61,7 +62,7 @@ const NAV = [
 const MOBILE_NAV = [
   { to: "/dashboard", label: "Início", icon: LayoutDashboard },
   { to: "/jobs", label: "Vagas", icon: Briefcase },
-  { to: "/jobs/new", label: "Adicionar", icon: Search },
+  { to: "/jobs/search", label: "Buscar", icon: Search },
   { to: "/resumes", label: "Currículos", icon: FileText },
   { to: "/applications", label: "Kanban", icon: Kanban },
 ] as const;
@@ -88,7 +89,7 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
           </p>
           <ul className="space-y-0.5">
             {group.items.map((item) => {
-              const active = pathname === item.to || (item.to !== "/dashboard" && pathname.startsWith(item.to));
+              const active = pathname === item.to || (item.to !== "/dashboard" && item.to !== "/jobs" && pathname.startsWith(item.to)) || (item.to === "/jobs" && /^\/jobs\/(?!new|search)/.test(pathname));
               return (
                 <li key={item.to}>
                   <Link

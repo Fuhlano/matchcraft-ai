@@ -35,10 +35,10 @@ export interface NormalizedJob {
 export interface ProviderResult {
   source: string;
   status: "ok" | "not_configured" | "error" | "skipped";
-  message?: string;
+  message?: string | undefined;
   jobs: NormalizedJob[];
   /** Para fontes de carreira: board consultado com sucesso (permite marcar vagas encerradas). */
-  boardsChecked?: string[];
+  boardsChecked?: string[] | undefined;
 }
 
 export function stripHtml(html: string): string {
@@ -141,7 +141,7 @@ async function jooble(f: SearchFilters): Promise<ProviderResult> {
     }),
   });
   if (!res.ok) return { source: "jooble", status: "error", message: `Jooble respondeu ${res.status}`, jobs: [] };
-  const data = (await res.json()) as { jobs?: Record<string, string>[] };
+  const data = (await res.json()) as { jobs?: any[] };
   return {
     source: "jooble",
     status: "ok",

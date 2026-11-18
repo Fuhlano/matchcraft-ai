@@ -30,7 +30,7 @@ export function matchLevel(score: number) {
 }
 
 /** Equivalências semânticas conhecidas (PT/EN e variações de produto). */
-const SYNONYMS: string[][] = [
+export const SYNONYMS: string[][] = [
   ["power bi", "microsoft power bi", "powerbi"],
   ["data visualization", "visualizacao de dados", "data viz"],
   ["data analytics", "analise de dados", "analytics"],

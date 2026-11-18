@@ -36,6 +36,9 @@ function hashFilters(f: unknown) {
   return String(h);
 }
 
+type ExtRow = import("@/integrations/supabase/types").Database["public"]["Tables"]["external_jobs"]["Row"];
+const getRows = async (): Promise<ExtRow[]> => [];
+
 export const getSourcesStatus = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
@@ -60,7 +63,7 @@ export const searchExternalJobs = createServerFn({ method: "POST" })
         .order("created_at", { ascending: false }).limit(1).maybeSingle();
       if (cached) {
         const { data: rows } = await supabase.from("external_jobs").select("*").in("id", cached.result_ids).eq("status", "open");
-        return { jobs: rows ?? [], sources: cached.sources as unknown[], cached: true, searchedAt: cached.created_at };
+        return { jobs: rows ?? [], sources: cached.sources as { source: string; status: string; message: string; count: number }[], cached: true, searchedAt: cached.created_at };
       }
     }
 
@@ -102,7 +105,7 @@ export const searchExternalJobs = createServerFn({ method: "POST" })
       ...j, also_seen_in: [...also], status: "open", last_seen_at: now, last_checked_at: now,
     }));
 
-    let stored: any[] = [];
+    let stored: Awaited<ReturnType<typeof getRows>> = [];
     if (rows.length) {
       const { data: up, error } = await supabaseAdmin.from("external_jobs").upsert(rows, { onConflict: "dedupe_hash" }).select("*");
       if (error) { console.error("[job-search] upsert", error); throw new Error("Não foi possível salvar as vagas encontradas."); }
