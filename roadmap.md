@@ -4,4 +4,6 @@
 - [x] Conferir que nenhuma chave está versionada
 - [x] Páginas: perfil, currículos, editor de currículo, candidaturas
 - [ ] Match: comparar nível de idioma e tratar "X avançado" como parcial
+- [x] Módulo Encontrar vagas (Greenhouse/Lever ativos)
+- [ ] Chaves Jooble/Adzuna (aguardando usuário)
 - [ ] Dados de demonstração identificados
